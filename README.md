@@ -128,7 +128,7 @@ CTRL + X then Y and Enter
 Open screen
 
 ```
-screen -S fb
+screen -S cat
 ```
 ```
 chmod +x mint_script.sh
