@@ -49,7 +49,7 @@ If you have firewall
 ```
 ufw allow 3000
 ufw allow 5432
-ufw allow 8333
+ufw allow 8333/tcp
 ufw allow 8332
 ```
 
