@@ -125,7 +125,11 @@ Edit the fee rate accordingly
 sudo yarn cli mint -i 45ee725c2c5993b3e4d308842d87e973bf1951f5f7a804b21e4dd964ecd12d6b_0 5 --fee-rate 150
 ```
 CTRL + X then Y and Enter
+Open screen
 
+```
+screen -S fb
+```
 ```
 chmod +x mint_script.sh
 bash ~/cat-token-box/packages/cli/mint_script.sh
