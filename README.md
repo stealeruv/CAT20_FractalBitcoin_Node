@@ -1,104 +1,126 @@
-# CAT20 MINT
+# CAT20 Token Minting using Fractal Bitcoin Node
 
-1. **Install Packages:**
+Join TG : https://t.me/cryptoconsol
 
-```shell
-sudo apt update && sudo apt upgrade -y
-sudo apt install curl build-essential pkg-config libssl-dev git wget jq make gcc chrony -y
+Install Docker
 ```
-
-## Node Installation
-
-1. **Download the Fractal Repository:**
-
-```shell
-wget https://github.com/fractal-bitcoin/fractald-release/releases/download/v0.2.1/fractald-0.2.1-x86_64-linux-gnu.tar.gz
+sudo apt update && sudo apt install -y curl && curl -fsSL https://get.docker.com -o get-docker.sh && sudo sh get-docker.sh
+Install Docker Compose
+sudo curl -L "https://github.com/docker/compose/releases/download/$(curl -s https://api.github.com/repos/docker/compose/releases/latest | grep 'tag_name' | cut -d\" -f4)/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 ```
-
-2. **Extract the File:**
-
-```shell
-tar -zxvf fractald-0.2.1-x86_64-linux-gnu.tar.gz
+Make this executable
 ```
-
-3. **Create the Data Folder:**
-
-```shell
-cd fractald-0.2.1-x86_64-linux-gnu && mkdir data
+sudo chmod +x /usr/local/bin/docker-compose
 ```
-
-4. **Copy the Configuration File:**
-
-```shell
-cp ./bitcoin.conf ./data
+Install npm
 ```
-5. Edit file
+sudo apt-get install npm -y
 ```
-cd data && nano ./bitcoin.conf
+Install n pacakges globally
 ```
-6. Paste 
+sudo npm i n -g
 ```
-port=8333
- txindex=1
-server=1
-rest=1
- rpcallowip=0.0.0.0/0
-rpcbind=0.0.0.0
-rpcport=8332
-rpcuser=bitcoin
-rpcpassword=opcatAwesome
-rpcworkqueue=2048
-rpcthreads=32
-rpcservertimeout=120
-zmqpubhashblock=tcp://0.0.0.0:8330 zmqpubrawtx=tcp://0.0.0.0:8331  maxconnections=50
-debug=bench
-debug=netmsg
+Switch to stable node version
+```
+sudo n stable
+```
+Install yarn package globally
+```
+sudo npm i -g yarn
+```
+Clone Cat Protocol repo
+```
+git clone https://github.com/CATProtocol/cat-token-box && cd cat-token-box
+```
+Install and build this project
+```
+sudo yarn install && yarn build
+```
+Change directory to tracker
+```
+cd packages/tracker
+```
+Run Fractal Bitcoin node
+```
+sudo chmod 777 docker/data && sudo chmod 777 docker/pgdata && docker compose up -d
 ```
 
-7. Run Node
-
+Build docker image
 ```
-./bin/bitcoind -datadir=./data/ -maxtipage=504576000
+cd ../../ && docker build -t tracker:latest .
 ```
-8. Install Node js
-
-
-### installs nvm (Node Version Manager)
+Run the container
 ```
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
+docker run -d \
+    --name tracker \
+    --add-host="host.docker.internal:host-gateway" \
+    -e DATABASE_HOST="host.docker.internal" \
+    -e RPC_HOST="host.docker.internal" \
+    -p 3000:3000 \
+    tracker:latest
 ```
-### download and install Node.js (you may need to restart the terminal)
+Change directory
 ```
-nvm install 22
+cd $HOME/cat-token-box/packages/cli
 ```
-### verifies the right Node.js version is in the environment
+create a config.json 
 ```
-node -v # should print `v22.8.0`
+nano config.json
 ```
-### verifies the right npm version is in the environment
+Paste this
 ```
-npm -v # should print `10.8.2`
-```
-### 9. CATBOX 
-
-```
-git clone https://github.com/CATProtocol/cat-token-box.git
-```
-```
-npm i -g yarn
-```
-```
-cd cat-token-box && yarn install && yarn build
-```
-### 9. Create Wallet
-
-```
-yarn cli wallet create
+{
+  "network": "fractal-mainnet",
+  "tracker": "http://127.0.0.1:3000",
+  "dataDir": ".",
+  "maxFeeRate": 30,
+  "rpc": {
+      "url": "http://127.0.0.1:8332",
+      "username": "bitcoin",
+      "password": "opcatAwesome"
+  }
+}
 ```
 
-Fund the wallet (right now use coinex to buy and withraw $FB)
+
+CTRL + X then Y and Enter
+
+
+create a wallet
+```
+sudo yarn cli wallet create
+```
+View the address
+```
+yarn cli wallet address
+```
+You need to have FB token on mainnet, 
+Get the $FB token from Coinex Exchange : https://www.coinex.com/register?refer_code=pkwtn
+
+Check the balance
+```
+sudo yarn cli wallet balances
+```
+Single Mint Command
+```
+sudo yarn cli mint -i 45ee725c2c5993b3e4d308842d87e973bf1951f5f7a804b21e4dd964ecd12d6b_0 5 --fee-rate 150
+```
+or use Multi Mint Automation
+```
+cd
+cd && nano cat-token-box/packages/cli/mint_script.sh
+```
+Paste this
+Edit the fee rate accordingly
+```
+sudo yarn cli mint -i 45ee725c2c5993b3e4d308842d87e973bf1951f5f7a804b21e4dd964ecd12d6b_0 5 --fee-rate 150
+```
+CTRL + X then Y and Enter
 
 ```
-cd ./packages/tracker/ && docker-compose up
+chmod +x mint_script.sh
+bash ~/cat-token-box/packages/cli/mint_script.sh
 ```
+
+Check the fee and change according to the market : https://explorer.unisat.io/fractal-mainnet
 
