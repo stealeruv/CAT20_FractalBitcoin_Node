@@ -45,6 +45,14 @@ Run Fractal Bitcoin node
 sudo chmod 777 docker/data && sudo chmod 777 docker/pgdata && docker compose up -d
 ```
 
+If you have firewall
+```
+ufw allow 3000
+ufw allow 5432
+ufw allow 8333
+ufw allow 8332
+```
+
 Build docker image
 ```
 cd ../../ && docker build -t tracker:latest .
