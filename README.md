@@ -85,6 +85,9 @@ npm -v # should print `10.8.2`
 git clone https://github.com/CATProtocol/cat-token-box.git
 ```
 ```
+npm i -g yarn
+```
+```
 cd cat-token-box && yarn install && yarn build
 ```
 ### 9. Create Wallet
