@@ -63,23 +63,23 @@ debug=netmsg
 8. Install Node js
 
 
-# installs nvm (Node Version Manager)
+### installs nvm (Node Version Manager)
 ```
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
 ```
-# download and install Node.js (you may need to restart the terminal)
+### download and install Node.js (you may need to restart the terminal)
 ```
 nvm install 22
 ```
-# verifies the right Node.js version is in the environment
+### verifies the right Node.js version is in the environment
 ```
 node -v # should print `v22.8.0`
 ```
-# verifies the right npm version is in the environment
+### verifies the right npm version is in the environment
 ```
 npm -v # should print `10.8.2`
 ```
-8. CATBOX 
+### 9. CATBOX 
 
 ```
 git clone https://github.com/CATProtocol/cat-token-box.git
@@ -87,7 +87,7 @@ git clone https://github.com/CATProtocol/cat-token-box.git
 ```
 cd cat-token-box && yarn install && yarn build
 ```
-8. Create Wallet
+### 9. Create Wallet
 
 ```
 yarn cli wallet create
@@ -98,5 +98,4 @@ Fund the wallet (right now use coinex to buy and withraw $FB)
 ```
 cd ./packages/tracker/ && docker-compose up
 ```
-Fund the wallet (right now use coinex to buy and withraw $FB)
 
