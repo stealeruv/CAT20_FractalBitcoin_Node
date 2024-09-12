@@ -112,7 +112,6 @@ sudo yarn cli wallet balances
 ```
 **Wait untill blocks to sync**
 
-Check the fee and change according to the market : https://explorer.unisat.io/fractal-mainnet
 
 Single Mint Command
 ```
@@ -125,8 +124,7 @@ cd && nano cat-token-box/packages/cli/mint_script.sh
 ```
 Paste this
 
-Edit the fee rate accordingly
-Check the fee and change according to the market : https://explorer.unisat.io/fractal-mainnet
+ Explorer : https://explorer.unisat.io/fractal-mainnet
 
 ```
 #!/bin/bash
