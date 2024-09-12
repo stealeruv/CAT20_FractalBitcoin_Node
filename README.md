@@ -16,16 +16,10 @@ sudo chmod +x /usr/local/bin/docker-compose
 Install npm
 ```
 sudo apt-get install npm -y
-```
-Install n pacakges globally
-```
 sudo npm i n -g
-```
-Switch to stable node version
-```
 sudo n stable
 ```
-Install yarn package globally
+Install yarn
 ```
 sudo npm i -g yarn
 ```
