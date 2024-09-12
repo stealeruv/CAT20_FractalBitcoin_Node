@@ -116,7 +116,7 @@ Check the fee and change according to the market : https://explorer.unisat.io/fr
 
 Single Mint Command
 ```
-sudo yarn cli mint -i 45ee725c2c5993b3e4d308842d87e973bf1951f5f7a804b21e4dd964ecd12d6b_0 5 --fee-rate 150
+sudo yarn cli mint -i 45ee725c2c5993b3e4d308842d87e973bf1951f5f7a804b21e4dd964ecd12d6b_0 5 --fee-rate $(curl -s https://explorer.unisat.io/fractal-mainnet/api/bitcoin-info/fee | jq '.data.fastestFee')
 ```
 or use Multi Mint Automation
 ```
@@ -131,7 +131,7 @@ Check the fee and change according to the market : https://explorer.unisat.io/fr
 ```
 #!/bin/bash
 
-    command="sudo yarn cli mint -i 45ee725c2c5993b3e4d308842d87e973bf1951f5f7a804b21e4dd964ecd12d6b_0 5 --fee-rate 150"
+    command="sudo yarn cli mint -i 45ee725c2c5993b3e4d308842d87e973bf1951f5f7a804b21e4dd964ecd12d6b_0 5 --fee-rate $(curl -s https://explorer.unisat.io/fractal-mainnet/api/bitcoin-info/fee | jq '.data.fastestFee')"
 
     while true; do
         $command
